@@ -68,7 +68,7 @@ pub struct Builder {
 impl Builder {
     /// Create a new RPM builder
     pub fn new(
-        config: PackageConfig,
+        mut config: PackageConfig,
         verbose: bool,
         rpm_config_dir: &Path,
         base_target_dir: &Path,
@@ -96,6 +96,12 @@ impl Builder {
 
         let target_dir = base_target_dir.join(target).join(profile);
         let rpmbuild_dir = target_dir.join("rpmbuild");
+
+        if let Some(ref metadata) = config.metadata {
+            if let Some(release_name) = &metadata.release_name {
+                config.name = release_name.clone();
+            }
+        }
 
         Self {
             config,

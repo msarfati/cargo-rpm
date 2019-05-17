@@ -84,6 +84,9 @@ impl PackageConfig {
 pub struct PackageMetadata {
     /// Our custom RPM metadata extension to `Cargo.toml`
     pub rpm: Option<RpmConfig>,
+
+    /// Release name, if the release name is different from the package name
+    pub release_name: Option<String>,
 }
 
 /// Our `[package.metadata.rpm]` extension to `Cargo.toml`
