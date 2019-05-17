@@ -66,7 +66,7 @@ impl PackageConfig {
 
         let config: CargoConfig = toml::from_str(&data)
             .map_err(|e| format_err!("error parsing {}: {}", filename.as_ref().display(), e))?;
-
+        println!("{:?}", config);
         Ok(config.package)
     }
 
@@ -84,9 +84,6 @@ impl PackageConfig {
 pub struct PackageMetadata {
     /// Our custom RPM metadata extension to `Cargo.toml`
     pub rpm: Option<RpmConfig>,
-
-    /// Release name, if the release name is different from the package name
-    pub release_name: Option<String>,
 }
 
 /// Our `[package.metadata.rpm]` extension to `Cargo.toml`
@@ -100,6 +97,9 @@ pub struct RpmConfig {
 
     /// Extra files (taken from the `.rpm` directory) to include in the RPM
     pub files: Option<BTreeMap<String, FileConfig>>,
+
+    /// Release name, if the release name is different from the package name
+    pub release_name: Option<String>,
 }
 
 /// Options for creating the release artifact

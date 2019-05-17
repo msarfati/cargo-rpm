@@ -92,16 +92,16 @@ impl Builder {
                     target = t.to_owned();
                 }
             }
+
+            if let Some(ref release_name) = rpm_metadata.release_name {
+                config.name = release_name.to_owned();
+            }
         }
 
         let target_dir = base_target_dir.join(target).join(profile);
         let rpmbuild_dir = target_dir.join("rpmbuild");
 
-        if let Some(ref metadata) = config.metadata {
-            if let Some(release_name) = &metadata.release_name {
-                config.name = release_name.clone();
-            }
-        }
+        println!("{:?}", config.clone().metadata);
 
         Self {
             config,
