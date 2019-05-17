@@ -101,8 +101,6 @@ impl Builder {
         let target_dir = base_target_dir.join(target).join(profile);
         let rpmbuild_dir = target_dir.join("rpmbuild");
 
-        println!("{:?}", config.clone().metadata);
-
         Self {
             config,
             verbose,

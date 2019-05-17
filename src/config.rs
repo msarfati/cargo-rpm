@@ -66,7 +66,6 @@ impl PackageConfig {
 
         let config: CargoConfig = toml::from_str(&data)
             .map_err(|e| format_err!("error parsing {}: {}", filename.as_ref().display(), e))?;
-        println!("{:?}", config);
         Ok(config.package)
     }
 
